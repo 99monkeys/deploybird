@@ -22,10 +22,6 @@ gem 'omniauth-github'
 gem 'yajl-ruby'
 gem 'faraday'
 gem 'faraday_middleware'
-gem 'capistrano', '~> 2.13'
-gem 'capistrano_colors'
-gem 'rvm-capistrano'
-gem 'capistrano_rsync_with_remote_cache'
 gem 'rugged'
 gem 'dotiw'
 gem 'inherited_resources'
@@ -35,6 +31,12 @@ gem 'simple_form', '~> 2'
 gem 'open4'
 gem 'ansible'
 gem 'unicorn'
+
+## CAPISTRANO
+gem 'capistrano'
+gem 'capistrano3-unicorn'
+gem 'capistrano-bundler'
+gem 'capistrano-rvm'
 
 # While these are not needed by Strano itself, without them installed, any project
 # that requires them will die when Strano tries to run a cap task. By using
