@@ -35,6 +35,7 @@ gem 'unicorn'
 #
 group :development do
   gem 'capistrano'
+  gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
   gem 'capistrano-bundler'
   gem 'capistrano-rvm'
