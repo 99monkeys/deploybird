@@ -4,10 +4,12 @@ namespace :bg do
     Rails.logger = ActiveSupport::BufferedLogger.new(Rails.root.join('log/bg-worker.log'))
     while true
       while job = Job.where(:visible => false, :completed_at => nil).reorder(:created_at).first do
+        puts "perform #{job.id}"
         job.perform
       end
 
       while job = Job.where(:visible => true, :completed_at => nil).reorder(:created_at).first do
+        puts "perform #{job.id}"
         job.perform
       end
 

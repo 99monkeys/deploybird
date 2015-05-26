@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '~> 3.2.12'
 gem 'pg'
+gem 'sqlite3'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -9,8 +10,10 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
+  gem 'bootstrap-sass', '~> 3.3.4'
 end
 
+gem 'jquery-ui-rails'
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
 gem 'slim'
@@ -23,7 +26,7 @@ gem 'capistrano', '~> 2.13'
 gem 'capistrano_colors'
 gem 'rvm-capistrano'
 gem 'capistrano_rsync_with_remote_cache'
-gem 'grit'
+gem 'rugged'
 gem 'dotiw'
 gem 'inherited_resources'
 gem 'kaminari'
@@ -54,6 +57,7 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-pow'
+  gem 'pry'
 end
 
 group :test do

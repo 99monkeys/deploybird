@@ -1,7 +1,7 @@
 FactoryGirl.define do
 
   factory :user do
-    username Faker::Internet.user_name
+    username FFaker::Internet.user_name
     github_access_token 'somerandomstring'
   end
 

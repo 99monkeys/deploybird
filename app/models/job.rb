@@ -20,18 +20,19 @@ class Job < ActiveRecord::Base
   def perform
     Rails.logger.info "Performing Job #{id}"
     if visible?
-      Project::PullRepo.perform(project_id) unless project.pull_in_progress?
+      Project::PullRepo.perform(project_id) if !project.pull_in_progress?
 
       success = true
 
       FileUtils.chdir project.repo.path do
         # clear env
-        env = {'GEM_PATH' => nil, 'GEM_HOME' => nil, 'RUBYOPT' => nil, 'BUNDLE_BIN_PATH' => nil, 'BUNDLE_GEMFILE' => nil, 'GIT_AUTHOR_NAME' => user.to_s}
+        env = {'GEM_PATH' => nil, 'GEM_HOME' => nil, 'RUBYOPT' => nil, 'BUNDLE_BIN_PATH' => nil, 'BUNDLE_GEMFILE' => './Gemfile', 'GIT_AUTHOR_NAME' => user.to_s, 'DEPLOY_AUTHOR' => user.to_s}
+        #binding.pry
         Open3.popen2e(env, command) do |input, output_and_error, wait_thread|
           input.close
           while !output_and_error.eof?
             msg = output_and_error.readline
-            update_attribute :results, (results_before_type_cast || '') + msg unless msg.blank?
+           update_attribute :results, (results_before_type_cast || '') + msg unless msg.blank?
           end
 
           success = wait_thread.value.success?
@@ -65,11 +66,13 @@ class Job < ActiveRecord::Base
   end
 
   def command
+    cmd = "cd #{project.repo.path} ; bundle exec "
     if task.with_argument?
-      task.name.sub(Task::ARG_PLACEHOLDER, notes)
+      cmd << task.name.sub(Task::ARG_PLACEHOLDER, notes)
     else
-      task.name
+      cmd << task.name
     end
+    cmd
   end
 
 end

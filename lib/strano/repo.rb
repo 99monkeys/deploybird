@@ -18,7 +18,8 @@ module Strano
     # Returns the newly clone Strano::Repo object.
     def self.clone(url)
       repo = new(url)
-      repo.git.fs_mkdir('..') if !repo.git.fs_exist?('..')
+      FileUtils.mkdir(repo.path)
+      #repo.git.fs_mkdir('..') if !repo.git.fs_exist?('..')
       repo.git.clone({:timeout => false}, url, repo.path)
       repo
     end
@@ -30,7 +31,8 @@ module Strano
     # Returns Boolean true if the repo was successfully removed.
     def self.pull(url)
       repo = new(url)
-      repo.git.pull({:timeout => false, :chdir => repo.path, :base => false})
+      #repo.git.pull({:timeout => false, :chdir => repo.path, :base => false})
+      `cd #{repo.path}; git pull`
     end
 
     # Remove a cloned repo from the filesystem.
@@ -62,7 +64,10 @@ module Strano
     end
 
     def git
-      @git ||= Grit::Git.new(path)
+      @git ||= Rugged::Repository.new(path)
+    end
+    def git_repo
+      @git ||= Rugged::Repository.new(path)
     end
 
     def exists?
@@ -73,14 +78,15 @@ module Strano
     #
     # Returns a Boolean true if it has been cloned.
     def cloned?
-      git.fs_exist? '.git'
+      git_repo.fs_exist? '.git'
     end
 
     # Is this repo capified? Meaning does it have a Capfile in its root.
     #
     # Returns a Boolean true if it has been capified.
     def capified?
-      git.fs_exist? 'Capfile'
+      result= File.exist?(File.join(path, 'Capfile'))
+      result
     end
 
   end
