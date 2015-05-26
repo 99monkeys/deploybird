@@ -32,10 +32,13 @@ gem 'ansible'
 gem 'unicorn'
 
 ## CAPISTRANO
-gem 'capistrano'
-gem 'capistrano3-unicorn'
-gem 'capistrano-bundler'
-gem 'capistrano-rvm'
+#
+group :development do
+  gem 'capistrano'
+  gem 'capistrano3-unicorn'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
+end
 
 # While these are not needed by Strano itself, without them installed, any project
 # that requires them will die when Strano tries to run a cap task. By using
