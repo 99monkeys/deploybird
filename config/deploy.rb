@@ -18,6 +18,7 @@ set :rvm_ruby_version, '2.1.2'
 set :rails_env,        :production
 
 set :linked_files,          ['config/database.yml', 'config/strano.yml', 'db/production.sqlite3']
+set :linked_dirs,           ['vendor/repos', 'tmp', 'log']
 
 
 
