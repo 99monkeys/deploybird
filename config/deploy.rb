@@ -17,25 +17,9 @@ set :rvm_custom_path,  '/opt/rvm'
 set :rvm_ruby_version, '2.1.2'
 set :rails_env,        :production
 
-set :linked_files,          ['config/database.yml', 'config/strano.yml']
+set :linked_files,          ['config/database.yml', 'config/strano.yml', 'db/production.sqlite3']
 
 
-
-namespace :deploy do
-  task :restart do
-    exec "if [ -f #{fetch(:unicorn_pid)} ]; then kill -USR2 `cat #{fetch(:unicorn_pid)}`; else cd #{fetch(:deploy_to)}/current && bundle exec unicorn -c #{fetch(:unicorn_conf)} -E #{fetch(:rails_env)} -D; fi"
-  end
-  task :start do
-    on roles(:app) do
-      within "#{fetch(:deploy_to)}/current" do
-        execute :bundle, 'exec unicorn -c #{unicorn_conf} -E #{rails_env} -D"'
-      end
-    end
-  end
-  task :stop do
-    exec "if [ -f #{fetch(:unicorn_pid)} ]; then kill -QUIT `cat #{fetch(:unicorn_pid)}`; fi"
-  end
-end
 
 after 'deploy:publishing', 'unicorn:restart'
 after 'deploy:publishing', 'bg:restart'

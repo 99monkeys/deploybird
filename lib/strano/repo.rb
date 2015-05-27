@@ -20,7 +20,7 @@ module Strano
       repo = new(url)
       FileUtils.mkdir(repo.path)
       #repo.git.fs_mkdir('..') if !repo.git.fs_exist?('..')
-      repo.git.clone({:timeout => false}, url, repo.path)
+      `git clone #{repo.ssh_url} #{repo.path}`
       repo
     end
 

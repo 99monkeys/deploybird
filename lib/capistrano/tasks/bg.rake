@@ -13,11 +13,14 @@ namespace :bg do
 
   end
 
-  task :restart => [:stop, :start] do
-
+  task :restart  do
+    Rake::Task["bg:stop"].invoke
+    Rake::Task["bg:start"].invoke
   end
 
   task :stop do
-    exec "if [ -f #{fetch(:bg_pid)} ]; then kill -QUIT `cat #{fetch(:bg_pid)}`; fi"
+    on roles(:app) do
+      execute "if [ -f #{fetch(:bg_pid)} ]; then kill -s KILL `cat #{fetch(:bg_pid)}`; rm #{fetch(:bg_pid)}; fi"
+    end
   end
 end
