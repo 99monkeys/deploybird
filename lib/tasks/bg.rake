@@ -1,7 +1,6 @@
 namespace :bg do
   desc "Run jobs in background"
   task :work, [:pid_file] => [:environment] do |_t, args|
-    binding.pry
     `echo #{Process.pid} >> #{args[:pid_file]}`
     Rails.logger = ActiveSupport::BufferedLogger.new(Rails.root.join('log/bg-worker.log'))
     while true
