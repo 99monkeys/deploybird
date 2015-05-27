@@ -5,6 +5,7 @@ lock '3.4.0'
 set :application, 'strano'
 set :repo_url,    'git@github.com:99monkeys/deploybird.git'
 set :deploy_to,   "/opt/strano"
+set :bg_pid,      "#{shared_path}/tmp/pids/bg.pid"
 
 set :linked_dirs, %w(tmp)
 
@@ -27,7 +28,7 @@ namespace :deploy do
   task :start do
     on roles(:app) do
       within "#{fetch(:deploy_to)}/current" do
-        execute :bundle, 'exec bundle exec unicorn -c #{unicorn_conf} -E #{rails_env} -D"'
+        execute :bundle, 'exec unicorn -c #{unicorn_conf} -E #{rails_env} -D"'
       end
     end
   end
