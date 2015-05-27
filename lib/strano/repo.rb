@@ -18,8 +18,7 @@ module Strano
     # Returns the newly clone Strano::Repo object.
     def self.clone(url)
       repo = new(url)
-      FileUtils.mkdir(repo.path)
-      #repo.git.fs_mkdir('..') if !repo.git.fs_exist?('..')
+      `mkdir -p #{repo.path}`
       `git clone #{repo.ssh_url} #{repo.path}`
       repo
     end
