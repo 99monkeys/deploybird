@@ -2,6 +2,7 @@ namespace :bg do
   desc "Run jobs in background"
   task :work, [:pid_file] => [:environment] do |_t, args|
     `echo #{Process.pid} > #{args[:pid_file]}`
+    puts "PID: #{Process.pid}"
     Rails.logger = ActiveSupport::BufferedLogger.new(Rails.root.join('log/bg-worker.log'))
     while true
       while job = Job.where(:visible => false, :completed_at => nil).reorder(:created_at).first do

@@ -6,8 +6,8 @@ set :application, 'strano'
 set :repo_url,    'git@github.com:99monkeys/deploybird.git'
 set :deploy_to,   "/opt/strano"
 set :bg_pid,      "#{shared_path}/tmp/pids/bg.pid"
+set :pty,         true
 
-set :linked_dirs, %w(tmp)
 
 
 # Default branch is :master

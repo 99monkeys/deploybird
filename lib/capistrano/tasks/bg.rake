@@ -5,7 +5,7 @@ namespace :bg do
     on roles(:app) do
       within "#{fetch(:deploy_to)}/current" do
         with rails_env: fetch(:rails_env) do
-          execute :bundle, "exec rake bg:work['#{fetch(:bg_pid)}'] > /dev/null 2>&1 &" 
+          execute :bundle, "exec rake bg:work['#{fetch(:bg_pid)}']" 
         end
       end
     end
