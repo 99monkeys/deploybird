@@ -66,7 +66,7 @@ class Job < ActiveRecord::Base
   end
 
   def command
-    cmd = "ssh-add;cd #{project.repo.path} ; bundle exec "
+    cmd = "cd #{project.repo.path} ; bundle exec "
     if task.with_argument?
       cmd << task.name.sub(Task::ARG_PLACEHOLDER, notes)
     else
