@@ -1,0 +1,13 @@
+- title resource_class.to_s.underscore.humanize.pluralize
+- if collection.empty?
+  h4[align="center"]
+    | No
+    = resource_class.to_s.underscore.humanize.pluralize
+    | found!
+- else
+  table.zebra-striped
+    thead
+      tr
+        = render 'table_head'
+    tbody
+      = render collection

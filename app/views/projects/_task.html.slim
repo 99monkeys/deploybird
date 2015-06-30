@@ -1,0 +1,32 @@
+.row.margin-top
+  .col-md-1.margin-top.right
+    = link_to 'Run...', new_project_jobs_path(resource, task.id), :class => "btn btn-primary"
+  .col-md-11.bordered-bottom.padding-bottom2.padding-top
+    .row
+      .col-md-9
+        |  <h3 class="
+        = 'quieter' if hidden
+        | "> 
+        = task.name
+        small.padding-left
+          = task.description
+      .col-md-3.right.margin-top2
+        = link_to raw("show full description »"), '#', :class => "show-task-description smaller" unless task.description.blank?
+    .row
+      .col-md-9.quiet
+        - if last_run = resource.jobs.where(:task_id => task.id).first
+          |  last run 
+          = link_to "#{time_ago_in_words(last_run.created_at)} ago", [resource, last_run]
+          |  by 
+          = last_run.user
+          span.smaller.quieter.padding-left
+            | (
+            = last_run.created_at.to_s :short
+            | )
+          - - end
+    - unless task.description.blank?
+      .row.hide
+        .col-md-9
+          pre
+            = task.description
+      - - end

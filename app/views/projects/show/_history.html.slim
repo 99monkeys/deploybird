@@ -1,0 +1,49 @@
+#history.tab-pane
+  - if resource.jobs.empty?
+    h4[align="center"]
+      | You haven't run any jobs for this project yet!
+  - else
+    table.table.table-striped
+      thead
+        tr
+          th[width="220"]
+            | Date
+          th
+            | Task
+          th
+            | Run by
+          th
+            | Ran for
+          th[width="125"]
+          th[width="125"]
+      tbody
+        - resource.jobs.page(params[:page]).each do |job|
+          tr
+            td.small
+              strong
+                = time_ago_in_words job.created_at
+                |  ago
+              div
+                = job.created_at.to_s :short
+            td
+              code
+                = job.command
+            td
+              = job.user
+            td.small
+              = distance_of_time_in_words(job.created_at, job.completed_at, true) if job.completed_at
+            td
+              = link_to "view results", [resource, job], :class => 'label label-info'
+            td
+              - if job.complete?
+                - if job.success?
+                  span.label.label-success
+                    | SUCCESS
+                - else
+                  span.label.label-important
+                    | FAILED
+                  - - end
+                  - - end
+          - - end
+    = paginate resource.jobs.page(params[:page])
+    - - end

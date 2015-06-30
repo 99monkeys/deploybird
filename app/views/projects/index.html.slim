@@ -1,0 +1,22 @@
+- - title 'Projects'
+.well
+  = link_to 'Create github project...', new_resource_path(:type => :github), :class => "btn btn-primary"
+  = link_to 'Create project...', new_resource_path, :class => "btn btn-primary"
+- if collection.empty?
+  h4[align="center"]
+    | You haven't created any projects yet! 
+    = link_to "Create a project now", new_resource_path
+    | ...
+- else
+  table.table.table-striped
+    thead
+      tr
+        th
+          | Name
+        th
+          | Latest task
+        th
+          | Repo updated
+    tbody
+      = render collection
+  - - end

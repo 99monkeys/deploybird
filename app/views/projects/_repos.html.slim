@@ -1,0 +1,12 @@
+- if repos.empty?
+  h4[align="center"]
+    | No repositories found in your Github account! Strano currently only supports the deployment of Github repositories.
+- else
+  .row
+    - repos.in_groups(2) do |group|
+      .col-md-6
+        table.table.table-striped
+          tbody
+            = render :partial => 'projects/repo', :collection => group
+      - - end
+  - - end

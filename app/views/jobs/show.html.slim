@@ -1,0 +1,43 @@
+- title "Job ##{resource.id}"
+- subtitle "task: #{resource.command} by #{resource.user}"
+- breadcrumb "Projects", projects_path
+- breadcrumb parent, parent
+.tabbable
+  ul.nav.nav-tabs
+
+  .pull-right
+    - if resource.complete?
+      - if resource.success?
+        span.label.label-success
+          | SUCCESS
+      - else
+        span.label.label-important
+          | FAILED
+  li.active
+    a[href="#results" data-toggle="tab"]
+      | Results
+  li
+    = link_to 'Repeat...', new_project_jobs_path(parent, resource.task_id)
+  .tab-content
+    #results.tab-pane.active
+      - if resource.complete?
+        h3
+          |  Task '
+          = resource.command
+          | '   
+          small
+            | completed
+            = resource.completed_at.to_s :short
+        pre#job-results
+          = raw resource.results
+      - else
+        h3
+          = image_tag("loading.gif", :size => "16x16")
+          |  Running '
+          = resource.task.name
+          | ' ...
+        |  <pre id="job-results" class="hide" data-job_id="
+        = resource.id
+        | " data-project_id="
+        = parent.id
+        | ">
