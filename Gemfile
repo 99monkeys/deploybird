@@ -15,7 +15,7 @@ end
 gem 'jquery-ui-rails'
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
-gem 'slim'
+gem 'slim-rails'
 gem 'sinatra'
 gem 'omniauth-github'
 gem 'yajl-ruby'

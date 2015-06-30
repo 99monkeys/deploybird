@@ -8,14 +8,14 @@
 <% end %>
 
 <div class="row">
-  <div class="span3 right">
+  <div class="col-md-3 right">
 
     <p>Description</p>
     <p>Repository</p>
     <%- if resource.organization? -%><p>Organization</p><%- end -%>
 
   </div>
-  <div class="span9">
+  <div class="col-md-9">
 
     <p><strong><%= resource.description.blank? ? '&nbsp;'.html_safe : resource.description %></strong></p>
     <p><%= link_to resource.html_url, resource.html_url %></p>
@@ -29,11 +29,11 @@
 <hr />
 
 <div class="row">
-  <div class="span3 right">
+  <div class="col-md-3 right">
     <p class="quiet">Latest task:</p>
     <p class="quiet">Local repo updated:</p>
   </div>
-  <div class="span9">
+  <div class="col-md-9">
     <p>
       <%- if last_run = resource.jobs.first -%>
         <%= link_to last_run.command, [resource, last_run] %> by <%= last_run.user %>
@@ -61,11 +61,11 @@
 <hr />
 
 <div class="row">
-  <div class="span3 right">
+  <div class="cal-md-3 right">
     <p class="quieter small">Created:</p>
     <p class="quieter small">Updated:</p>
   </div>
-  <div class="span9">
+  <div class="cal-md-9">
     <p class="quieter small"><%= resource.created_at.to_s :long_ordinal %></p>
     <p class="quieter small"><%= resource.updated_at.to_s :long_ordinal %></p>
   </div>

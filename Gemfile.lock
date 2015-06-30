@@ -257,6 +257,12 @@ GEM
     slim (3.0.3)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
+    slim-rails (3.0.1)
+      actionmailer (>= 3.1, < 5.0)
+      actionpack (>= 3.1, < 5.0)
+      activesupport (>= 3.1, < 5.0)
+      railties (>= 3.1, < 5.0)
+      slim (~> 3.0)
     slop (3.6.0)
     sprockets (2.2.3)
       hike (~> 1.2)
@@ -342,7 +348,7 @@ DEPENDENCIES
   shoulda-matchers
   simple_form (~> 2)
   sinatra
-  slim
+  slim-rails
   sqlite3
   therubyracer
   twitter-bootstrap-rails
