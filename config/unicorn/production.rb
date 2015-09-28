@@ -1,9 +1,9 @@
-deploy_to   = "/opt/strano"
+deploy_to   = "/srv/strano"
 rails_root  = "#{deploy_to}/current"
 shared_path = "#{deploy_to}/shared"
 pid_file   = "#{shared_path}/tmp/pids/unicorn.pid"
 socket_file= "#{shared_path}/tmp/sockets/unicorn.sock"
-listen_address = "127.0.0.1:3001"
+listen_address = "127.0.0.1:3000"
 log_file   = "#{shared_path}/log/unicorn.log"
 err_log    = "#{shared_path}/log/unicorn.err"
 old_pid    = pid_file + '.oldbin'
