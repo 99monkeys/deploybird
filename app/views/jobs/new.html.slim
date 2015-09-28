@@ -10,12 +10,12 @@
       span.input-xlarge.uneditable-input
         = resource.task.name
       = f.hidden_field :task_id
-  - if resource.task.with_argument?
-    .control-group
-      label.control-label
-        | Arguments
-      .controls
-        = f.text_area :notes
+    - if resource.task.with_argument?
+      .control-group
+        label.control-label
+          | Arguments
+        .controls
+          = f.text_area :notes
     .form-actions
       = f.button :submit, 'Start Task', :disable_with => "Starting task..."
       = f.button :cancel, :url => parent_path
