@@ -6,15 +6,14 @@ tr
   td
     - if last_run = project.jobs.first
       = link_to last_run.command, [project, last_run]
-      |  by 
+      |  by
       = last_run.user
-      |      
+      |     
       span.quieter.smaller
         = time_ago_in_words last_run.created_at
         |  ago
     - else
       code.no-bg
         | n/a
-      - - end
   td.small.quiet
     = project.pulled_at ? "#{time_ago_in_words(project.pulled_at)} ago" : raw('<code class="no-bg">n/a</code>')

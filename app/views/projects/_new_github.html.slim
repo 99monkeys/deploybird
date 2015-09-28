@@ -4,11 +4,10 @@
       li.active
         a[href="#repos" data-toggle="tab"]
           | My Repositories
-      - - end
       - if Strano.allow_organizations?
         li.dropdown
           a.dropdown-toggle[href="#" data-toggle="dropdown"]
-            | Organisations... 
+            | Organisations...
             b.caret
           ul.dropdown-menu
             - current_user.github.orgs.each do |org|
@@ -17,20 +16,16 @@
                 = org.login
                 | " data-toggle="tab">
                 = org.login
-              - - end
-        - - end
   .tab-content
     - if Strano.allow_users_include?(current_user.username)
       #repos.tab-pane.active
         = render 'repos', :repos => current_user.github.repos
-      - - end
       - current_user.github.orgs.each do |org|
         |  <div class="tab-pane" id="
         = org.login
-        | "> 
+        | ">
         h2.page-header
           = image_tag org.avatar_url, :size => "26x26", :class => "org-avatar"
           span.padding-bottom3
             = org.login
         = render 'repos', :repos => org.repos
-  - - end if Strano.allow_organizations?
