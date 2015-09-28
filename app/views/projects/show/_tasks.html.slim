@@ -6,4 +6,3 @@
     = link_to 'New task', new_project_task_path(resource), :class => "btn btn-primary"
   - @recent_tasks.each do |task|
     = render :partial => "task", :locals => { :task => task, :hidden => false }
-    - - end
